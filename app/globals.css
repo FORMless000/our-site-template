@@ -1,0 +1,493 @@
+:root {
+  --bg: #faf5ea;
+  --bg-soft: #f1e6d6;
+  --panel: rgba(255, 255, 255, 0.72);
+  --panel-strong: #fff9f1;
+  --line: rgba(37, 31, 25, 0.08);
+  --text: #251f19;
+  --muted: rgba(37, 31, 25, 0.72);
+  --accent: #b86f2a;
+  --accent-2: #d8a15e;
+  --shadow: rgba(37, 31, 25, 0.12);
+  --max-width: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(184, 111, 42, 0.3), transparent 32%),
+    linear-gradient(180deg, #f8f1e4 0%, #f1e6d6 100%);
+  font-family:
+    "Avenir Next", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.site-shell {
+  min-height: 100vh;
+}
+
+.container {
+  width: min(var(--max-width), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 248, 239, 0.8);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.75rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(216, 161, 94, 0.28), rgba(184, 111, 42, 0.24));
+  border: 1px solid rgba(37, 31, 25, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.brand-copy strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.brand-copy span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.hero-band,
+.section,
+.site-footer {
+  padding: 4.5rem 0;
+}
+
+.hero-layout,
+.section-grid,
+.demo-detail-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.hero-layout {
+  align-items: center;
+}
+
+.hero-copy h1,
+.section-heading h2,
+.demo-detail-copy h1,
+.section-grid h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.section-grid h2,
+.section-heading h2,
+.demo-detail-copy h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.lead,
+.section-heading p,
+.info-card p,
+.demo-card p,
+.demo-detail-copy p,
+.site-footer p,
+.page-intro p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.kicker,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color: white;
+}
+
+.button-secondary {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--text);
+}
+
+.feature-strip,
+.card-stack,
+.demo-list,
+.detail-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.feature-strip {
+  margin-top: 2rem;
+}
+
+.feature-tile,
+.info-card,
+.demo-card,
+.detail-panel,
+.stage-frame,
+.chat-shell,
+.page-frame {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  box-shadow: 0 16px 40px var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.feature-tile,
+.info-card,
+.detail-panel {
+  padding: 1.15rem;
+}
+
+.feature-tile strong,
+.info-card h3,
+.demo-card h3,
+.detail-panel h3 {
+  display: block;
+  margin-bottom: 0.45rem;
+}
+
+.feature-tile span {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.section-muted {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.section-heading,
+.page-intro {
+  max-width: 44rem;
+  margin-bottom: 2rem;
+}
+
+.demo-list {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.demo-card {
+  padding: 1.25rem;
+}
+
+.demo-meta,
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.page-main {
+  padding: 3rem 0 4.5rem;
+}
+
+.page-frame {
+  padding: 1.5rem;
+}
+
+.detail-panel ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.stage-frame {
+  padding: 1rem;
+}
+
+.signal-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at center, rgba(184, 111, 42, 0.28), rgba(37, 31, 25, 0.95));
+}
+
+.signal-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-toggle {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 50;
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-radius: 1.3rem;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color: white;
+  box-shadow: 0 18px 50px rgba(37, 31, 25, 0.22);
+  cursor: pointer;
+}
+
+.chat-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: transparent;
+  border: 0;
+}
+
+.chat-widget {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 6.1rem;
+  z-index: 60;
+  width: min(420px, calc(100vw - 1.8rem));
+  display: grid;
+}
+
+.chat-shell {
+  padding: 1rem;
+}
+
+.icon-button {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.chat-close {
+  justify-self: end;
+  margin-bottom: 0.55rem;
+}
+
+.chat-log {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 320px;
+  overflow: auto;
+  padding-right: 0.2rem;
+}
+
+.chat-message {
+  max-width: 90%;
+  padding: 0.9rem 1rem;
+  border-radius: 1.15rem;
+  line-height: 1.65;
+}
+
+.chat-message.assistant {
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid var(--line);
+}
+
+.chat-message.user {
+  margin-left: auto;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color: white;
+}
+
+.chat-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.chat-form {
+  margin-top: 0.9rem;
+}
+
+.chat-input {
+  width: 100%;
+  min-height: 6.2rem;
+  resize: vertical;
+  padding: 0.9rem 1rem;
+  color: var(--text);
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.chat-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.chat-caption {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.iframe-shell {
+  overflow: hidden;
+  border-radius: 1.2rem;
+  border: 1px solid var(--line);
+}
+
+.iframe-shell iframe {
+  display: block;
+  width: 100%;
+  min-height: 580px;
+  border: 0;
+  background: white;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .hero-layout {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .section-grid {
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: start;
+  }
+
+  .feature-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .demo-detail-grid {
+    grid-template-columns: 0.92fr 1.08fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+
+  .chat-widget {
+    right: 0.9rem;
+    bottom: 5.7rem;
+    width: calc(100vw - 1.2rem);
+  }
+
+  .chat-toggle {
+    right: 0.9rem;
+    bottom: 0.9rem;
+  }
+}

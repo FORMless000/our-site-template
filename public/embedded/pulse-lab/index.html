@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulse Lab</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #faf5ea;
+        --fg: #251f19;
+        --accent: #b86f2a;
+        --card: rgba(255, 255, 255, 0.72);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--fg);
+        background:
+          radial-gradient(circle at top, rgba(184, 111, 42, 0.3), transparent 32%),
+          linear-gradient(180deg, #f8f1e4 0%, #f1e6d6 100%);
+      }
+
+      .shell {
+        min-height: 100vh;
+        padding: 28px;
+      }
+
+      .card {
+        max-width: 860px;
+        margin: 0 auto;
+        border: 1px solid rgba(37, 31, 25, 0.08);
+        border-radius: 28px;
+        background: var(--card);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 20px 60px rgba(37, 31, 25, 0.12);
+        padding: 28px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1;
+      }
+
+      p {
+        line-height: 1.6;
+      }
+
+      .layout {
+        display: grid;
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      @media (min-width: 860px) {
+        .layout {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
+      }
+
+      .panel {
+        border-radius: 24px;
+        border: 1px solid rgba(37, 31, 25, 0.08);
+        background: rgba(255, 255, 255, 0.72);
+        padding: 20px;
+      }
+
+      .meter {
+        height: 14px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: rgba(37, 31, 25, 0.08);
+        margin-top: 12px;
+      }
+
+      .meter > div {
+        height: 100%;
+        width: 35%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #d8a15e, #b86f2a);
+        transition: width 220ms ease;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        background: var(--accent);
+        color: white;
+        padding: 12px 18px;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .orbits {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 24px;
+        overflow: hidden;
+        background: radial-gradient(circle at center, rgba(184, 111, 42, 0.28), rgba(37, 31, 25, 0.95));
+      }
+
+      .dot {
+        position: absolute;
+        inset: 50%;
+        width: 18px;
+        height: 18px;
+        margin: -9px;
+        border-radius: 999px;
+        background: rgba(255, 236, 209, 0.88);
+      }
+
+      .caption {
+        margin-top: 10px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="card">
+        <div>
+          <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.6;">Embedded placeholder app</div>
+          <h1>Pulse Lab</h1>
+          <p>
+            This page lives in <code>public/embedded/pulse-lab</code>. It is a good stand-in for any older
+            exported utility you want to showcase inside the main Next.js preview gallery.
+          </p>
+        </div>
+        <div class="layout">
+          <div class="panel">
+            <div>Engagement pulse</div>
+            <div class="meter"><div id="meter-fill"></div></div>
+            <p id="summary">Click the button to cycle through a few states.</p>
+            <button id="advance">Advance state</button>
+          </div>
+          <div class="panel">
+            <div class="orbits" id="orbits">
+              <div class="dot" id="dot"></div>
+            </div>
+            <div class="caption">A tiny animated surface to prove the iframe can still feel lively.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const widths = [35, 54, 72, 88];
+      const summaries = [
+        "A quiet baseline that works for default screenshots.",
+        "More activity is flowing through the embedded app.",
+        "The panel is now acting like a more interactive mini tool.",
+        "This is a good point to swap in a real exported project.",
+      ];
+      const fill = document.getElementById("meter-fill");
+      const summary = document.getElementById("summary");
+      const button = document.getElementById("advance");
+      const dot = document.getElementById("dot");
+
+      let index = 0;
+
+      button.addEventListener("click", () => {
+        index = (index + 1) % widths.length;
+        fill.style.width = widths[index] + "%";
+        summary.textContent = summaries[index];
+      });
+
+      let frame = 0;
+      function animate() {
+        const x = Math.cos(frame / 35) * 88;
+        const y = Math.sin(frame / 48) * 64;
+        const scale = 1 + Math.sin(frame / 18) * 0.18;
+        dot.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        frame += 1;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
