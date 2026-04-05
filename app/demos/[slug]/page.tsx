@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { SignalStage } from '@/components/primitives/signal-stage'
 import { demoEntries, getDemoBySlug } from '@/lib/demos'
-import { SignalStage } from '@/components/signal-stage'
 import { withBasePath } from '@/lib/site'
 
 export function generateStaticParams() {

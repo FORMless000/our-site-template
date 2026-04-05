@@ -1,8 +1,9 @@
 import type React from 'react'
 import type { Metadata } from 'next'
 
-import { ChatWidget } from '@/components/chat-widget'
-import { SiteHeader } from '@/components/site-header'
+import { ChatWidget } from '@/components/site-shell/chat-widget'
+import { SiteFooter } from '@/components/site-shell/site-footer'
+import { SiteHeader } from '@/components/site-shell/site-header'
 
 import './globals.css'
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <div className="site-shell">
           <SiteHeader />
           {children}
+          <SiteFooter />
           <ChatWidget />
         </div>
       </body>

@@ -6,6 +6,7 @@ Signal Studio is a clean-room Next.js preview site for interactive web projects.
 - a homepage with an embedded visual experiment
 - a demo gallery for native and iframe-based projects
 - local development, production preview, and static export scripts
+- an optional Builder-ready homepage content layer with local fallback
 
 ## Quick Start
 
@@ -34,6 +35,8 @@ Optional environment variables:
 - `PORT`
 - `BASE_PATH`
 - `STATIC_EXPORT`
+- `BUILDER_PUBLIC_API_KEY`
+- `BUILDER_HOME_MODEL`
 
 ## Routes
 
@@ -51,6 +54,22 @@ BASE_PATH=/your-repo-name pnpm host:static
 ```
 
 Publish the generated `out/` directory.
+
+## Builder Homepage Content
+
+The homepage now renders from a typed content contract in `lib/content/home-page.ts`.
+
+- Without Builder env vars, the site uses local fallback content.
+- With `BUILDER_PUBLIC_API_KEY` set, the app attempts to fetch the homepage model from Builder's Content API.
+- If Builder content is missing or invalid, the page falls back to the local content defaults.
+
+The initial Builder-friendly shape is intentionally narrow:
+
+- `hero`
+- `approach`
+- `demos`
+
+This keeps the current visual composition stable while making the homepage marketing content easier to map into visual editors.
 
 ## Agent Guidance
 
