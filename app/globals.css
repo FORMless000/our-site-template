@@ -1,8 +1,11 @@
 :root {
   --bg: #faf5ea;
+  --bg-rgb: 250, 245, 234;
   --bg-soft: #f1e6d6;
+  --bg-soft-rgb: 241, 230, 214;
   --panel: rgba(255, 255, 255, 0.72);
   --panel-strong: #fff9f1;
+  --panel-strong-rgb: 255, 249, 241;
   --line: rgba(37, 31, 25, 0.08);
   --text: #251f19;
   --muted: rgba(37, 31, 25, 0.72);
@@ -124,10 +127,105 @@ textarea {
   align-items: center;
 }
 
+.project-demo-frame,
+.gateway-card,
+.project-demo-media-shell {
+  position: relative;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  box-shadow: 0 16px 40px var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.title-display-section {
+  position: relative;
+  min-height: 34rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-underlay,
+.gateway-card-underlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--underlay-surface-rgb));
+}
+
+.section-underlay img,
+.gateway-card-graphical img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.section-underlay::after,
+.gateway-card-graphical::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--underlay-surface-rgb), calc(1 - var(--underlay-top-alpha))) var(--underlay-top-stop),
+    rgba(var(--underlay-surface-rgb), calc(1 - var(--underlay-mid-alpha))) var(--underlay-mid-stop),
+    rgba(var(--underlay-surface-rgb), calc(1 - var(--underlay-bottom-alpha))) var(--underlay-bottom-stop)
+  );
+}
+
+.underlay-surface-section {
+  --underlay-surface-rgb: var(--bg-soft-rgb);
+}
+
+.underlay-surface-panel {
+  --underlay-surface-rgb: var(--panel-strong-rgb);
+}
+
+.title-display-copy,
+.gateway-card-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.title-display-section .container {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+
+.title-display-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 52rem;
+}
+
+.title-align-center .title-display-copy {
+  margin-inline: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.title-align-left .title-display-copy {
+  margin-right: auto;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.title-align-right .title-display-copy {
+  margin-left: auto;
+  text-align: right;
+  align-items: flex-end;
+}
+
 .hero-copy h1,
+.title-display-copy h1,
 .section-heading h2,
 .demo-detail-copy h1,
-.section-grid h2 {
+.section-grid h2,
+.project-demo-copy h2,
+.modal-header h2 {
   margin: 0;
   font-size: clamp(2.5rem, 6vw, 4.9rem);
   line-height: 1.05;
@@ -136,20 +234,31 @@ textarea {
 
 .section-grid h2,
 .section-heading h2,
-.demo-detail-copy h1 {
+.demo-detail-copy h1,
+.project-demo-copy h2,
+.modal-header h2 {
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.08;
 }
 
 .lead,
+.title-display-subtitle,
 .section-heading p,
 .info-card p,
 .demo-card p,
 .demo-detail-copy p,
 .site-footer p,
-.page-intro p {
+.page-intro p,
+.project-demo-copy p,
+.gateway-card-copy p {
   color: var(--muted);
   line-height: 1.7;
+}
+
+.title-display-subtitle {
+  max-width: 44rem;
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
 .kicker,
@@ -168,6 +277,14 @@ textarea {
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-top: 2rem;
+}
+
+.title-align-center .button-row {
+  justify-content: center;
+}
+
+.title-align-right .button-row {
+  justify-content: flex-end;
 }
 
 .button {
@@ -199,7 +316,8 @@ textarea {
 .feature-strip,
 .card-stack,
 .demo-list,
-.detail-list {
+.detail-list,
+.gateway-grid {
   display: grid;
   gap: 1rem;
 }
@@ -231,7 +349,8 @@ textarea {
 .feature-tile strong,
 .info-card h3,
 .demo-card h3,
-.detail-panel h3 {
+.detail-panel h3,
+.gateway-card-copy h3 {
   display: block;
   margin-bottom: 0.45rem;
 }
@@ -282,6 +401,141 @@ textarea {
   padding: 3rem 0 4.5rem;
 }
 
+.project-demo-grid {
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.project-demo-media-shell {
+  position: relative;
+  z-index: 2;
+}
+
+.project-demo-media-shell.is-fullscreen {
+  position: fixed;
+  inset: 1rem;
+  z-index: 96;
+  width: auto;
+  height: auto;
+}
+
+.project-demo-frame {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+.project-demo-media-shell.is-fullscreen .project-demo-frame {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.project-demo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-demo-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.project-demo-copy p {
+  margin: 1rem 0 0;
+}
+
+.project-demo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  border: 0;
+  background: rgba(22, 16, 11, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.project-demo-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.project-demo-icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.text-link-accent {
+  color: var(--accent);
+}
+
+.gateway-grid-textual {
+  grid-template-columns: repeat(var(--mobile-columns, 1), minmax(0, 1fr));
+}
+
+.gateway-grid-graphical {
+  grid-template-columns: repeat(var(--mobile-columns, 1), minmax(0, 1fr));
+}
+
+.gateway-card {
+  display: block;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  aspect-ratio: var(--card-aspect-ratio, 4 / 3);
+}
+
+.gateway-card:hover,
+.gateway-card:focus-visible,
+.project-demo-frame .button:hover,
+.project-demo-copy .button:hover {
+  transform: translateY(-1px);
+}
+
+.gateway-card-textual {
+  padding: 1.25rem;
+}
+
+.gateway-card-copy {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gateway-card-copy p {
+  margin-bottom: 0;
+}
+
+.gateway-card-graphical {
+  overflow: hidden;
+}
+
+.gateway-card-graphical img {
+  display: block;
+}
+
 .page-frame {
   padding: 1.5rem;
 }
@@ -309,6 +563,45 @@ textarea {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.counter-demo {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at top, rgba(216, 161, 94, 0.28), transparent 30%),
+    linear-gradient(180deg, rgba(14, 24, 34, 0.95), rgba(24, 34, 48, 0.92));
+  color: #f7f4ee;
+}
+
+.counter-demo strong {
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.9;
+}
+
+.counter-demo p {
+  max-width: 30rem;
+  margin: 0;
+  color: rgba(247, 244, 238, 0.78);
+  line-height: 1.7;
+}
+
+.counter-demo-expanded {
+  min-height: 620px;
+}
+
+.project-demo-media-shell.is-fullscreen .iframe-shell iframe {
+  min-height: calc(100vh - 9rem);
+}
+
+.project-demo-media-shell.is-fullscreen .signal-stage {
+  height: 100% !important;
+  min-height: calc(100vh - 9rem);
 }
 
 .chat-toggle {
@@ -470,9 +763,37 @@ textarea {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .gateway-grid-textual,
+  .gateway-grid-graphical {
+    grid-template-columns: repeat(var(--tablet-columns, 2), minmax(0, 1fr));
+  }
+
+  .project-demo-grid-left {
+    grid-template-columns: 1.02fr 0.98fr;
+  }
+
+  .project-demo-grid-right {
+    grid-template-columns: 0.98fr 1.02fr;
+  }
+
+  .project-demo-grid-right .project-demo-media-shell {
+    order: 2;
+  }
+
+  .project-demo-grid-right .project-demo-copy {
+    order: 1;
+  }
+
   .demo-detail-grid {
     grid-template-columns: 0.92fr 1.08fr;
     align-items: start;
+  }
+}
+
+@media (min-width: 1100px) {
+  .gateway-grid-textual,
+  .gateway-grid-graphical {
+    grid-template-columns: repeat(var(--desktop-columns, 3), minmax(0, 1fr));
   }
 }
 
@@ -490,5 +811,9 @@ textarea {
   .chat-toggle {
     right: 0.9rem;
     bottom: 0.9rem;
+  }
+
+  .project-demo-media-shell.is-fullscreen {
+    inset: 0.6rem;
   }
 }

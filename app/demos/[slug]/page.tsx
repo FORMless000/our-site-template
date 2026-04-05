@@ -1,28 +1,32 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { SignalStage } from '@/components/primitives/signal-stage'
+import { ProjectSurface } from '@/components/projects/project-surface'
 import { demoEntries, getDemoBySlug } from '@/lib/demos'
-import { withBasePath } from '@/lib/site'
 
 export function generateStaticParams() {
   return demoEntries.map((demo) => ({ slug: demo.slug }))
 }
 
 function DemoPreview({ slug }: { slug: string }) {
+  if (slug === 'counter') {
+    return <ProjectSurface project={{ projectKind: 'native', projectKey: 'counter' }} expanded />
+  }
+
   if (slug === 'signal-canvas') {
-    return <SignalStage height={560} />
+    return <ProjectSurface project={{ projectKind: 'native', projectKey: 'signal_canvas' }} expanded />
   }
 
   if (slug === 'pulse-lab') {
     return (
-      <div className="iframe-shell">
-        <iframe
-          title="Pulse Lab"
-          src={withBasePath('/embedded/pulse-lab/index.html')}
-          sandbox="allow-scripts allow-same-origin"
-        />
-      </div>
+      <ProjectSurface
+        project={{
+          projectKind: 'iframe',
+          src: '/embedded/pulse-lab/index.html',
+          iframeTitle: 'Pulse Lab',
+        }}
+        expanded
+      />
     )
   }
 

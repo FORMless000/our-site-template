@@ -1,12 +1,12 @@
 import { HomePageSections } from '@/components/sections/home-page-sections'
-import { getHomePageContent } from '@/lib/content/get-home-page-content'
+import { getHomePageDocument } from '@/lib/content/get-homepage-document'
 
 export default async function Home() {
-  const content = await getHomePageContent()
+  const document = await getHomePageDocument()
 
   return (
     <main>
-      <HomePageSections content={content} />
+      <HomePageSections document={document} />
     </main>
   )
 }

@@ -3,10 +3,9 @@
 Signal Studio is a clean-room Next.js preview site for interactive web projects. It includes:
 
 - a site-wide popup chatbot launcher
-- a homepage with an embedded visual experiment
+- a TOML-driven homepage built from reusable landing blocks
 - a demo gallery for native and iframe-based projects
 - local development, production preview, and static export scripts
-- an optional Builder-ready homepage content layer with local fallback
 
 ## Quick Start
 
@@ -14,6 +13,25 @@ Signal Studio is a clean-room Next.js preview site for interactive web projects.
 pnpm install
 pnpm host:dev
 ```
+
+If `pnpm` is not installed globally, the hosting wrapper falls back to `corepack pnpm`.
+
+## Dependencies
+
+Runtime dependencies:
+
+- `lucide-react`
+- `next`
+- `react`
+- `react-dom`
+- `smol-toml`
+
+Development dependencies:
+
+- `@types/node`
+- `@types/react`
+- `@types/react-dom`
+- `typescript`
 
 ## Scripts
 
@@ -29,19 +47,20 @@ pnpm host:static
 - `prod` for a local production preview
 - `static` for export to `out/`
 
+The wrapper also auto-installs dependencies with `pnpm install --frozen-lockfile` or `corepack pnpm install --frozen-lockfile` when `node_modules/` is missing.
+
 Optional environment variables:
 
 - `HOST`
 - `PORT`
 - `BASE_PATH`
 - `STATIC_EXPORT`
-- `BUILDER_PUBLIC_API_KEY`
-- `BUILDER_HOME_MODEL`
 
 ## Routes
 
 - `/` home page
 - `/demos` demo index
+- `/demos/counter` native state-persistence demo
 - `/demos/signal-canvas` native visual demo
 - `/demos/pulse-lab` iframe demo from `public/embedded/pulse-lab`
 
@@ -55,21 +74,26 @@ BASE_PATH=/your-repo-name pnpm host:static
 
 Publish the generated `out/` directory.
 
-## Builder Homepage Content
+## Homepage Content
 
-The homepage now renders from a typed content contract in `lib/content/home-page.ts`.
+The homepage now renders from `content/homepage.toml`.
 
-- Without Builder env vars, the site uses local fallback content.
-- With `BUILDER_PUBLIC_API_KEY` set, the app attempts to fetch the homepage model from Builder's Content API.
-- If Builder content is missing or invalid, the page falls back to the local content defaults.
+- Blocks are ordered top-to-bottom by the `[[blocks]]` array in TOML.
+- Supported block types are:
+  - `title_display`
+  - `project_demo`
+  - `textual_gateway_group`
+  - `graphical_gateway_group`
+- Title sections support background underlays, shared gradient overlays, and configurable horizontal alignment.
+- Gateway groups support TOML-controlled columns and aspect ratios.
+- Native `project_demo` blocks currently support `signal_canvas` and `counter`.
+- Invalid or incomplete homepage content fails fast during build with a clear loader error.
 
-The initial Builder-friendly shape is intentionally narrow:
+Homepage artwork should live under `public/homepage/` and be referenced from TOML using site-relative paths such as `/homepage/title-underlay.svg`.
 
-- `hero`
-- `approach`
-- `demos`
+Full authoring guide:
 
-This keeps the current visual composition stable while making the homepage marketing content easier to map into visual editors.
+- [`docs/homepage-content.md`](/Users/accessair/Desktop/Workspaces/sites/our-site-template/docs/homepage-content.md)
 
 ## Agent Guidance
 

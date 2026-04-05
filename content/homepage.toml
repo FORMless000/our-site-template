@@ -1,0 +1,150 @@
+title = "Signal Studio Homepage"
+
+[[blocks]]
+type = "title_display"
+id = "opening"
+kicker = "Interactive studio"
+title = "Interactive systems, framed clearly."
+subtitle = "A compact launch page for live demos, project pathways, and visual entry points."
+body = "Signal Studio keeps the homepage focused: an opening statement, a featured interactive surface, richer text-led pathways, and fast image gateways that jump visitors straight into the work."
+content_align = "center"
+
+[blocks.image_underlay]
+src = "/homepage/title-underlay.svg"
+alt = ""
+decorative = true
+
+[blocks.image_underlay.overlay]
+top_opacity = 0.5
+mid_opacity = 0.24
+bottom_opacity = 0
+top_stop = 0
+mid_stop = 52
+bottom_stop = 100
+
+[[blocks.actions]]
+label = "View featured project"
+href = "#featured-project"
+style = "primary"
+
+[[blocks.actions]]
+label = "Browse project paths"
+href = "#project-paths"
+style = "secondary"
+
+[[blocks]]
+type = "project_demo"
+id = "featured-project"
+kicker = "Featured demo"
+title = "Signal Canvas"
+body = "A native interactive surface that previews how heavier visual work can live directly inside the homepage without losing the surrounding editorial structure."
+media_side = "left"
+project_kind = "native"
+project_key = "signal_canvas"
+go_to_href = "/demos/signal-canvas"
+go_to_label = "Learn More"
+
+[[blocks]]
+type = "project_demo"
+id = "counter-project"
+kicker = "Stateful demo"
+title = "Counter"
+body = "A minimal native demo that increments every second so you can verify the same running instance survives fullscreen transitions without resetting."
+media_side = "right"
+project_kind = "native"
+project_key = "counter"
+go_to_href = "/demos/counter"
+go_to_label = "Learn More"
+
+[[blocks]]
+type = "textual_gateway_group"
+id = "project-paths"
+kicker = "Project pathways"
+title = "Choose a deeper way into the studio."
+
+[blocks.layout]
+desktop_columns = 3
+tablet_columns = 2
+mobile_columns = 1
+aspect_ratio = "5:4"
+
+[[blocks.cards]]
+eyebrow = "Embedded web app"
+title = "Pulse Lab"
+body = "A sandboxed iframe route for self-contained experiments and older exported tools."
+href = "/demos/pulse-lab"
+
+[blocks.cards.image_underlay]
+src = "/homepage/pulse-card.svg"
+alt = ""
+decorative = true
+
+[blocks.cards.image_underlay.overlay]
+top_opacity = 0.1
+mid_opacity = 0.15
+bottom_opacity = 0
+top_stop = 0
+mid_stop = 50
+bottom_stop = 100
+
+[[blocks.cards]]
+eyebrow = "Native visual"
+title = "Signal Canvas detail"
+body = "See the dedicated route that pairs the live canvas with integration notes and future expansion points."
+href = "/demos/signal-canvas"
+
+[blocks.cards.image_underlay]
+src = "/homepage/signal-card.svg"
+alt = ""
+decorative = true
+
+[blocks.cards.image_underlay.overlay]
+top_opacity = 0.1
+mid_opacity = 0.15
+bottom_opacity = 0
+top_stop = 0
+mid_stop = 50
+bottom_stop = 100
+
+[[blocks.cards]]
+eyebrow = "Local workflow"
+title = "Hosting preview notes"
+body = "Follow the local-first preview flow and keep static export compatibility in the loop from the start."
+href = "#quick-links"
+
+[blocks.cards.image_underlay]
+src = "/homepage/notes-card.svg"
+alt = ""
+decorative = true
+
+[blocks.cards.image_underlay.overlay]
+top_opacity = 0.1
+mid_opacity = 0.15
+bottom_opacity = 0
+top_stop = 0
+mid_stop = 50
+bottom_stop = 100
+
+[[blocks]]
+type = "graphical_gateway_group"
+id = "quick-links"
+kicker = "Quick gateways"
+title = "Jump directly from image to destination."
+
+[blocks.layout]
+desktop_columns = 2
+tablet_columns = 2
+mobile_columns = 1
+aspect_ratio = "16:10"
+
+[[blocks.cards]]
+image_src = "/homepage/gateway-canvas.svg"
+image_alt = "Abstract signal rings and field lines previewing the Signal Canvas project"
+href = "/demos/signal-canvas"
+aria_label = "Open the Signal Canvas project page"
+
+[[blocks.cards]]
+image_src = "/homepage/gateway-pulse.svg"
+image_alt = "Layered pulse bars and orbiting shapes previewing the Pulse Lab project"
+href = "/demos/pulse-lab"
+aria_label = "Open the Pulse Lab project page"

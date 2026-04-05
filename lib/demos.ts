@@ -16,6 +16,26 @@ export interface DemoEntry {
 
 export const demoEntries: DemoEntry[] = [
   {
+    slug: 'counter',
+    title: 'Counter',
+    summary:
+      'A tiny native stateful demo that increments every second to verify fullscreen transitions preserve the same running instance.',
+    kind: 'webapp',
+    route: '/demos/counter',
+    mode: 'native',
+    status: 'ready',
+    highlights: [
+      'Keeps incrementing while toggling fullscreen on the homepage',
+      'Minimal native surface used to validate state persistence behavior',
+      'Helpful for checking that live instances are being enlarged instead of recreated',
+    ],
+    notes: [
+      'Use this project when testing fullscreen preservation and client-side state continuity.',
+      'It intentionally stays small so regressions are obvious during interaction.',
+      'This is a proof-of-behavior demo, not a production feature surface.',
+    ],
+  },
+  {
     slug: 'pulse-lab',
     title: 'Pulse Lab',
     summary:

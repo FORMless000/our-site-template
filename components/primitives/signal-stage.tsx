@@ -7,11 +7,14 @@ type SignalStageProps = {
 }
 
 export function SignalStage({ height = 420 }: SignalStageProps) {
+  const shellRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) {
+    const shell = shellRef.current
+
+    if (!canvas || !shell) {
       return
     }
 
@@ -21,15 +24,21 @@ export function SignalStage({ height = 420 }: SignalStageProps) {
     }
 
     let animationFrame = 0
+    let resizeFrame = 0
     let frame = 0
 
     const resize = () => {
-      const bounds = canvas.getBoundingClientRect()
+      const bounds = shell.getBoundingClientRect()
       const ratio = window.devicePixelRatio || 1
 
       canvas.width = bounds.width * ratio
       canvas.height = bounds.height * ratio
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
+    }
+
+    const scheduleResize = () => {
+      window.cancelAnimationFrame(resizeFrame)
+      resizeFrame = window.requestAnimationFrame(resize)
     }
 
     const render = () => {
@@ -92,16 +101,24 @@ export function SignalStage({ height = 420 }: SignalStageProps) {
 
     resize()
     render()
-    window.addEventListener('resize', resize)
+    window.addEventListener('resize', scheduleResize)
+
+    const resizeObserver = new ResizeObserver(() => {
+      scheduleResize()
+    })
+
+    resizeObserver.observe(shell)
 
     return () => {
       window.cancelAnimationFrame(animationFrame)
-      window.removeEventListener('resize', resize)
+      window.cancelAnimationFrame(resizeFrame)
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', scheduleResize)
     }
   }, [])
 
   return (
-    <div className="signal-stage" style={{ height }}>
+    <div ref={shellRef} className="signal-stage" style={{ height }}>
       <canvas ref={canvasRef} />
     </div>
   )

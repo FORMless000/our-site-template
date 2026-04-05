@@ -14,8 +14,6 @@ export function SiteHeader() {
 
         <nav className="nav-links">
           <Link href="/">Home</Link>
-          <Link href="/demos">Demos</Link>
-          <a href="#approach">Approach</a>
         </nav>
       </div>
     </header>
